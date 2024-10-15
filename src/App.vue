@@ -1,10 +1,7 @@
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-  </header>
+  <fn-header />
   <RouterView />
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FnHeader from './components/FnHeader.vue'
+</script>
