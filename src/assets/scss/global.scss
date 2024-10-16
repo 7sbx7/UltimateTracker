@@ -1,21 +1,18 @@
 @import './functions';
 @import './variables';
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: color($white, base);
+  font-family: 'Roboto', sans-serif;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
-  margin: 0;
+  padding: 0 $pad * 2;
   background-color: color($gray, base);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span {
-  color: color($white, base);
-  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }

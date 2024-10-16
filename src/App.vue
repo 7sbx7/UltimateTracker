@@ -3,5 +3,5 @@
   <RouterView />
 </template>
 <script setup lang="ts">
-import FnHeader from './components/FnHeader.vue'
+import FnHeader from './components/organisms/FnHeader.vue'
 </script>

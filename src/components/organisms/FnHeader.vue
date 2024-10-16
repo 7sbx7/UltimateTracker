@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { APP_NAME } from '../../utils/constants'
+import { APP_NAME } from '../../../utils/constants'
 
-// const menuOpened = ref<boolean>(false)
+const menuOpened = ref<boolean>(false)
 </script>
 
 <style lang="scss">
@@ -37,8 +37,16 @@ import { APP_NAME } from '../../utils/constants'
   &__icon {
     color: color($white, base);
     font-size: map-get($font-sizes, xxl);
-    padding: $pad * 2;
+    padding: $pad * 2 0;
     cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      text-shadow:
+        0 0 $pad color($yellow, base),
+        0 0 $pad color($white, base);
+      transform: scale(1.1);
+    }
   }
 }
 </style>
