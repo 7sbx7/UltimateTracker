@@ -31,7 +31,7 @@ defineProps<{
   required?: boolean
   iconType?: string
   iconSize?: string
-  modelValue: string | number
+  modelValue: string | number | null
 }>()
 </script>
 

@@ -21,7 +21,7 @@ defineProps<{
   type: string
   placeholder?: string
   required?: boolean
-  modelValue: string | number
+  modelValue: string | number | null
 }>()
 </script>
 
