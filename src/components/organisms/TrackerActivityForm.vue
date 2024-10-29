@@ -40,7 +40,7 @@ const handleAddActivity = () => {
   activityStore.addActivity({
     id: activityStore.activities.length + 1,
     name: activityName.value,
-    dateTime: new Date().getTime() + activityDuration.value! * 60 * 1000,
+    dateTo: (new Date().getTime() + activityDuration.value! * 1000) / 1000,
   })
 }
 </script>

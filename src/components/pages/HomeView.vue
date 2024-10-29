@@ -7,10 +7,11 @@
 
   <TrackerActivityForm v-if="actionBoxOpened" />
 
-  <div v-for="activity in activities" :key="activity.id">
-    <h2>{{ activity.name }}</h2>
-    <p>{{ activity.dateTime }}</p>
-  </div>
+  <TrackerItem
+    v-for="activity in activities"
+    :key="activity.id"
+    :activity="activity"
+  />
 </template>
 
 <script setup lang="ts">
@@ -18,6 +19,7 @@ import { ref } from 'vue'
 import IconHeading from '../molecules/IconHeading.vue'
 import { useActivityStore } from '@/stores/activity'
 import TrackerActivityForm from '../organisms/TrackerActivityForm.vue'
+import TrackerItem from '../organisms/TrackerItem.vue'
 
 const actionBoxOpened = ref<boolean>(false)
 
