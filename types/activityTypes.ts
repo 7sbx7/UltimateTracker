@@ -1,5 +1,5 @@
 export type ActivityType = {
-  id: number
+  id?: number
   name: string
   dateTo: number
 }

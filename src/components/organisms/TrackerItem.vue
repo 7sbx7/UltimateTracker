@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ activity.name }}</h2>
+  <h2>{{ activity.id + '. ' + activity.name }}</h2>
   <p>{{ timeLeft }}</p>
 </template>
 

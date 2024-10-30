@@ -28,20 +28,27 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useIndexedDB } from '../../../utils/indexedDB'
 import InputActionBox from '../molecules/InputActionBox.vue'
-import { useActivityStore } from '@/stores/activity'
+
+const emit = defineEmits(['activity-added'])
+const { addItem } = useIndexedDB('activities')
 
 const activityName = ref<string>('')
 const activityDuration = ref<number | null>(null)
 
-const activityStore = useActivityStore()
-
-const handleAddActivity = () => {
-  activityStore.addActivity({
-    id: activityStore.activities.length + 1,
-    name: activityName.value,
-    dateTo: (new Date().getTime() + activityDuration.value! * 1000) / 1000,
-  })
+const handleAddActivity = async () => {
+  try {
+    await addItem({
+      name: activityName.value,
+      dateTo: Math.round(
+        (new Date().getTime() + activityDuration.value! * 1000) / 1000,
+      ),
+    })
+    emit('activity-added')
+  } catch (error) {
+    console.error(error)
+  }
 }
 </script>
 

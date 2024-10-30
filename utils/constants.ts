@@ -1,1 +1,1 @@
-export const APP_NAME = 'Farm Tracker'
+export const APP_NAME = 'Ultimate Tracker'

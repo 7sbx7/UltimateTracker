@@ -2,10 +2,13 @@
   <IconHeading
     title="Your trackers"
     icon-type="fa-solid fa-plus"
-    @icon-click="openActionBox"
+    @icon-click="toggleActionBox"
   />
 
-  <TrackerActivityForm v-if="actionBoxOpened" />
+  <TrackerActivityForm
+    v-if="actionBoxOpened"
+    @activity-added="handleAddedActivity"
+  />
 
   <TrackerItem
     v-for="activity in activities"
@@ -15,17 +18,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { ActivityType } from 'types/activityTypes'
+import { onMounted, ref } from 'vue'
+import { useIndexedDB } from '../../../utils/indexedDB'
 import IconHeading from '../molecules/IconHeading.vue'
-import { useActivityStore } from '@/stores/activity'
 import TrackerActivityForm from '../organisms/TrackerActivityForm.vue'
 import TrackerItem from '../organisms/TrackerItem.vue'
 
+const { getAllItems } = useIndexedDB('activities')
+
 const actionBoxOpened = ref<boolean>(false)
+const activities = ref<ActivityType[]>([])
 
-const { activities } = useActivityStore()
-
-const openActionBox = () => {
+onMounted(async () => {
+  activities.value = await getAllItems()
+})
+const handleAddedActivity = async () => {
+  activities.value = await getAllItems()
+  toggleActionBox()
+}
+const toggleActionBox = () => {
   actionBoxOpened.value = !actionBoxOpened.value
 }
 </script>
