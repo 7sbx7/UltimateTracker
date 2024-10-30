@@ -3,3 +3,9 @@ export type ActivityType = {
   name: string
   dateTo: number
 }
+
+export type ActivityDurationType = {
+  hours: number
+  minutes: number
+  seconds: number
+}

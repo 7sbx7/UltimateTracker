@@ -10,6 +10,7 @@
         icon-type="fa-solid fa-hammer"
         icon-size="xxl"
         v-model="activityName"
+        required
       />
       <InputActionBox
         id="inputTimeLeft"
@@ -19,6 +20,7 @@
         icon-type="fa-solid fa-stopwatch"
         icon-size="xxl"
         v-model="activityDuration"
+        required
       />
 
       <button class="tf-button" submit>Add Activity</button>
