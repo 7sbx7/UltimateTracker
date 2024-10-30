@@ -49,13 +49,13 @@ export const useIndexedDB = (storeName: string) => {
     })
   }
 
-  const getStoreLength = async (): Promise<number> => {
+  const removeItem = async (id: number): Promise<void> => {
     const db: IDBDatabase = await getDB()
-    const transaction: IDBTransaction = db.transaction(storeName, 'readonly')
+    const transaction: IDBTransaction = db.transaction(storeName, 'readwrite')
     const objectStore: IDBObjectStore = transaction.objectStore(storeName)
 
     return new Promise((resolve, reject) => {
-      const request: IDBRequest = objectStore.count()
+      const request: IDBRequest = objectStore.delete(id)
       request.onsuccess = () => resolve(request.result)
       request.onerror = () => reject(request.error)
     })
@@ -64,6 +64,6 @@ export const useIndexedDB = (storeName: string) => {
   return {
     addItem,
     getAllItems,
-    getStoreLength,
+    removeItem,
   }
 }

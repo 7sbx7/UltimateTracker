@@ -14,6 +14,7 @@
     v-for="activity in activities"
     :key="activity.id"
     :activity="activity"
+    @activity-deleted="fetchItems"
   />
 </template>
 
@@ -33,11 +34,15 @@ const activities = ref<ActivityType[]>([])
 onMounted(async () => {
   activities.value = await getAllItems()
 })
+
 const handleAddedActivity = async () => {
-  activities.value = await getAllItems()
+  fetchItems()
   toggleActionBox()
 }
 const toggleActionBox = () => {
   actionBoxOpened.value = !actionBoxOpened.value
+}
+const fetchItems = async () => {
+  activities.value = await getAllItems()
 }
 </script>
