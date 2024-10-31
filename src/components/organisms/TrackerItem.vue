@@ -1,7 +1,13 @@
 <template>
-  <div class="tracker-item">
+  <div
+    class="tracker-item"
+    :class="{ 'tracker-item--completed': activityFinished }"
+  >
     <div class="ti-content">
-      <h2>{{ activity.name }}</h2>
+      <h2 class="ti-title">
+        {{ activity.name }}
+        <span class="ti-completed" v-if="activityFinished">completed</span>
+      </h2>
       <FormattedTime :time-left-in-seconds="timeLeftInSeconds" />
     </div>
 
@@ -11,15 +17,21 @@
       size="xl"
       @click="handleItemDelete(activity.id!)"
     />
+
+    <ProgressBar
+      :completion-percentage="completionPercentage"
+      :activity-finished="activityFinished"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { ActivityType } from 'types/activityTypes'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useIndexedDB } from '../../../utils/indexedDB'
 import FormattedTime from '../atoms/FormattedTime.vue'
 import BaseIcon from '../atoms/BaseIcon.vue'
+import ProgressBar from '../molecules/ProgressBar.vue'
 
 const emit = defineEmits(['activity-deleted'])
 
@@ -56,6 +68,14 @@ const handleCountdown = (dateTo: number): void => {
   }
 }
 
+const completionPercentage = computed(() => {
+  return (timeLeftInSeconds.value / props.activity.durationInSeconds) * 100
+})
+
+const activityFinished = computed(() => {
+  return timeLeftInSeconds.value <= 0
+})
+
 onMounted(() => {
   handleCountdown(props.activity.dateTo)
 })
@@ -65,9 +85,23 @@ onMounted(() => {
 .tracker-item {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   margin: $pad * 2 0;
-  padding: $pad;
+  padding: $pad 0;
   border-bottom: 1px solid color($gray, tone-3);
+
+  .ti-title {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+  }
+
+  .ti-completed {
+    margin-left: $pad * 2;
+    text-transform: uppercase;
+    font-size: map-get($font-sizes, s);
+    color: color($green, base);
+  }
 }
 </style>

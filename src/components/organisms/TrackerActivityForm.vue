@@ -46,6 +46,7 @@ const handleAddActivity = async () => {
       dateTo: Math.round(
         (new Date().getTime() + activityDuration.value! * 1000) / 1000,
       ),
+      durationInSeconds: activityDuration.value!,
     })
     emit('activity-added')
   } catch (error) {
