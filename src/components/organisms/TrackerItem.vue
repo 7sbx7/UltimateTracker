@@ -55,7 +55,7 @@ const handleCountdown = (dateTo: number): void => {
     timeLeftInSeconds.value = 0
   } else {
     timeLeftInSeconds.value = timeLeft
-    const countownInterval: number = setInterval(() => {
+    const countownInterval: ReturnType<typeof setInterval> = setInterval(() => {
       timeNowInSeconds = new Date().getTime() / 1000
       timeLeft = Math.floor(dateTo - timeNowInSeconds)
 
