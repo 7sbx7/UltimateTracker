@@ -1,7 +1,7 @@
 <template>
   <i
     class="base-icon"
-    :class="[type, `icon--size-${size}`, { opened: active }]"
+    :class="[type, { [`icon--size-${size}`]: size, opened: active }]"
   />
 </template>
 
