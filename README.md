@@ -30,6 +30,10 @@ npm run dev
 
 ```sh
 npm run build
+git add dist -f
+commit -m ""
+git subtree push --prefix dist origin gh-pages
+
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
