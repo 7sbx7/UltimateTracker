@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ActivityDurationType } from 'types/activityTypes'
 import { computed } from 'vue'
+import { splitTime, formatTimeValue } from '../../../utils/timeUtils'
 
 const props = defineProps<{
   timeLeftInSeconds: number
@@ -16,20 +16,4 @@ const timeFormatted = computed((): string => {
 
   return timeString
 })
-
-const splitTime = (timeLeftInSeconds: number): ActivityDurationType => {
-  const hours: number = Math.floor(timeLeftInSeconds / 3600)
-  const minutes: number = Math.floor((timeLeftInSeconds % 3600) / 60)
-  const seconds: number = Math.floor(timeLeftInSeconds % 60)
-
-  return {
-    hours,
-    minutes,
-    seconds,
-  }
-}
-
-const formatTimeValue = (value: number): string => {
-  return value < 10 ? '0' + value : value.toString()
-}
 </script>

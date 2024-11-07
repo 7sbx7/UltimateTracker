@@ -2,8 +2,10 @@
   <div class="ti-progress">
     <div
       class="ti-progress-bar"
-      :class="{ 'ti-progress-bar--completed': activityFinished }"
-      :style="{ width: `${completionPercentage}%` }"
+      :class="{ 'ti-progress-bar--completed': completionPercentage <= 0 }"
+      :style="{
+        width: `${completionPercentage > 0 ? completionPercentage : 0}%`,
+      }"
     />
   </div>
 </template>
@@ -11,7 +13,6 @@
 <script setup lang="ts">
 defineProps<{
   completionPercentage: number
-  activityFinished: boolean
 }>()
 </script>
 

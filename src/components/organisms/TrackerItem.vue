@@ -1,12 +1,14 @@
 <template>
   <div
     class="tracker-item"
-    :class="{ 'tracker-item--completed': activityFinished }"
+    :class="{ 'tracker-item--completed': completionPercentage <= 0 }"
   >
     <div class="ti-content">
       <h2 class="ti-title">
         {{ activity.name }}
-        <span class="ti-completed" v-if="activityFinished">completed</span>
+        <span class="ti-completed" v-if="completionPercentage <= 0"
+          >completed</span
+        >
       </h2>
       <FormattedTime :time-left-in-seconds="timeLeftInSeconds" />
     </div>
@@ -18,10 +20,7 @@
       @click="handleItemDelete(activity.id!)"
     />
 
-    <ProgressBar
-      :completion-percentage="completionPercentage"
-      :activity-finished="activityFinished"
-    />
+    <ProgressBar :completion-percentage="completionPercentage" />
   </div>
 </template>
 
@@ -70,10 +69,6 @@ const handleCountdown = (dateTo: number): void => {
 
 const completionPercentage = computed(() => {
   return (timeLeftInSeconds.value / props.activity.durationInSeconds) * 100
-})
-
-const activityFinished = computed(() => {
-  return timeLeftInSeconds.value <= 0
 })
 
 onMounted(() => {
