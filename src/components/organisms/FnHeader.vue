@@ -2,10 +2,12 @@
   <header class="header">
     <span class="header__logo">{{ APP_NAME }}</span>
   </header>
+  <TabsNavigation />
 </template>
 
 <script setup lang="ts">
 import { APP_NAME } from '../../../utils/constants'
+import TabsNavigation from '../molecules/TabsNavigation.vue'
 </script>
 
 <style lang="scss">

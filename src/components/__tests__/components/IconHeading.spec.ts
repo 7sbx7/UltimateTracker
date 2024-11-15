@@ -3,13 +3,6 @@ import { describe, it, expect, vi } from 'vitest'
 import IconHeading from '@/components/molecules/IconHeading.vue' // Adjust path as necessary
 import BaseIcon from '@/components/atoms/BaseIcon.vue'
 
-// Mock gsap to prevent warnings
-vi.mock('gsap', () => ({
-  default: {
-    from: vi.fn(),
-  },
-}))
-
 describe('IconHeading', () => {
   // Test rendering with props
   it('renders the title and icon correctly', () => {

@@ -32,17 +32,12 @@
 import { onMounted, ref } from 'vue'
 import { useIndexedDB } from '../../../utils/indexedDB'
 import InputActionBox from '../molecules/InputActionBox.vue'
-import gsap from 'gsap'
 
 const emit = defineEmits(['activity-added'])
 const { addItem } = useIndexedDB('activities')
 
 const activityName = ref<string>('')
 const activityDuration = ref<number | null>(null)
-
-onMounted(() => {
-  gsap.from('.tracker-form', { y: -20, opacity: 0, duration: 0.5 })
-})
 
 const handleAddActivity = async () => {
   try {
