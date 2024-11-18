@@ -14,7 +14,7 @@
       />
       <InputActionBox
         id="inputTimeLeft"
-        type="number"
+        type="string"
         label="Activity duration"
         placeholder="Type in your activity duration"
         icon-type="fa-solid fa-stopwatch"
@@ -29,24 +29,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useIndexedDB } from '../../../utils/indexedDB'
 import InputActionBox from '../molecules/InputActionBox.vue'
-
+import { formatActivityDurationInput } from '../../../utils/timeUtils'
 const emit = defineEmits(['activity-added'])
 const { addItem } = useIndexedDB('activities')
 
 const activityName = ref<string>('')
-const activityDuration = ref<number | null>(null)
+const activityDuration = ref<string>('')
 
 const handleAddActivity = async () => {
   try {
     await addItem({
       name: activityName.value,
       dateTo: Math.round(
-        (new Date().getTime() + activityDuration.value! * 1000) / 1000,
+        (new Date().getTime() +
+          formatActivityDurationInput(activityDuration.value) * 1000) /
+          1000,
       ),
-      durationInSeconds: activityDuration.value!,
+      durationInSeconds: formatActivityDurationInput(activityDuration.value),
     })
     emit('activity-added')
   } catch (error) {
