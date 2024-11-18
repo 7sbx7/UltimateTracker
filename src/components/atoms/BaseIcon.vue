@@ -15,6 +15,7 @@ defineProps<{
 
 <style scoped lang="scss">
 .base-icon {
+  display: block;
   color: color($white, base);
   font-size: map-get($font-sizes, xl);
   cursor: pointer;

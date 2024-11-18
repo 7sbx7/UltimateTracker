@@ -22,7 +22,7 @@
         v-model="activityDuration"
         required
       />
-
+      <MessageBox v-for="error in errors" :key="error" :message="error" />
       <button class="tf-button" submit>Add Activity</button>
     </form>
   </div>
@@ -33,14 +33,17 @@ import { ref } from 'vue'
 import { useIndexedDB } from '../../../utils/indexedDB'
 import InputActionBox from '../molecules/InputActionBox.vue'
 import { formatActivityDurationInput } from '../../../utils/timeUtils'
+import MessageBox from '../atoms/MessageBox.vue'
 const emit = defineEmits(['activity-added'])
 const { addItem } = useIndexedDB('activities')
 
 const activityName = ref<string>('')
 const activityDuration = ref<string>('')
+const errors = ref<string[]>([])
 
 const handleAddActivity = async () => {
   try {
+    errors.value = []
     await addItem({
       name: activityName.value,
       dateTo: Math.round(
@@ -51,8 +54,12 @@ const handleAddActivity = async () => {
       durationInSeconds: formatActivityDurationInput(activityDuration.value),
     })
     emit('activity-added')
-  } catch (error) {
-    console.error(error)
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      errors.value.push(error.message)
+    } else {
+      errors.value.push(String(error))
+    }
   }
 }
 </script>
