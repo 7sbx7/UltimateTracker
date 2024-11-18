@@ -32,7 +32,11 @@ const actionBoxOpened = ref<boolean>(false)
 const activities = ref<ActivityType[]>([])
 
 onMounted(async () => {
-  activities.value = await getAllItems()
+  try {
+    activities.value = await getAllItems()
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 const handleAddedActivity = async () => {

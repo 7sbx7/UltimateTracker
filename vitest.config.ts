@@ -4,6 +4,7 @@ import viteConfig from './vite.config'
 
 export default mergeConfig(
   viteConfig,
+
   defineConfig({
     test: {
       environment: 'jsdom',
@@ -13,6 +14,9 @@ export default mergeConfig(
         'src/**/*.{test,spec}.{js,ts}',
         'utils/**/*.{test,spec}.{js,ts}',
       ],
+      coverage: {
+        provider: 'istanbul',
+      },
     },
   }),
 )

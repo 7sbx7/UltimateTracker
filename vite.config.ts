@@ -13,6 +13,7 @@ export default defineConfig({
       targets: ['defaults', 'not IE 11', 'Safari >= 10'],
     }),
   ],
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

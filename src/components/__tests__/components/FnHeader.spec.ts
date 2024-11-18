@@ -5,7 +5,7 @@ import { APP_NAME } from '../../../../utils/constants'
 
 vi.mock('vue-router', () => ({
   useRoute: () => ({
-    path: '/', // Set the mocked current route path
+    path: '/',
   }),
 }))
 
