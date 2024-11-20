@@ -31,6 +31,7 @@ defineProps<{
     background-color: color($yellow, base);
     box-shadow: -8px 0px 16px 0px color($yellow, base);
     transition: 0.5s;
+    max-width: 100%;
 
     &--completed {
       width: 100% !important;

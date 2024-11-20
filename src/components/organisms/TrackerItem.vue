@@ -1,7 +1,11 @@
 <template>
   <div
     class="tracker-item"
-    :class="{ 'tracker-item--completed': completionPercentage <= 0 }"
+    :class="{
+      'tracker-item--completed': completionPercentage <= 0,
+      'tracker-item--time-tracker': timeTracker,
+      'tracker-item--pomodoro': pomodoro,
+    }"
   >
     <div class="ti-content">
       <h2 class="ti-title">
@@ -34,11 +38,13 @@ import ProgressBar from '../molecules/ProgressBar.vue'
 
 const emit = defineEmits(['activity-deleted'])
 
-const timeLeftInSeconds = ref<number>(0)
-
 const props = defineProps<{
   activity: ActivityType
+  timeTracker?: boolean
+  pomodoro?: boolean
 }>()
+
+const timeLeftInSeconds = ref<number>(0)
 
 const handleItemDelete = (id: number) => {
   const { removeItem } = useIndexedDB('activities')
@@ -77,7 +83,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.tracker-item {
+.tracker-item--time-tracker {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
